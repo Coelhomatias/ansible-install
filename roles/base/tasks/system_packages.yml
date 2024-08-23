@@ -49,6 +49,11 @@
     name: udiskie
     state: present
 
+- name: Install network manager applet
+  pacman:
+    name: network-manager-applet
+    state: present
+
 - name: Install QT libraries
   pacman:
     name:
