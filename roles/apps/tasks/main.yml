@@ -14,6 +14,7 @@
       - bitwarden
       - docker
       - docker-compose
+      - network-manager-applet
       # - aerc # Needs testing Looks awesome email client in terminal
     state: present
 
@@ -42,6 +43,7 @@
       - microsoft-edge-stable-bin
       - zapzap
       - stremio
+      - clipse
     state: present
   become: yes
   become_user: "{{ current_user }}"

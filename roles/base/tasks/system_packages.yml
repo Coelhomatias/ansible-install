@@ -49,18 +49,6 @@
     name: udiskie
     state: present
 
-- name: Install network manager applet
-  pacman:
-    name: network-manager-applet
-    state: present
-
-- name: Install QT libraries
-  pacman:
-    name:
-      - qt5-wayland
-      - qt6-wayland
-    state: present
-
 - name: Install system utils
   pacman:
     name:
@@ -79,12 +67,6 @@
   pacman:
     name:
       - libdbusmenu-gtk3
-    state: present
-
-- name: Install AUR system utils
-  pacman:
-    name:
-      - clipse
     state: present
 
 - name: Install zsh

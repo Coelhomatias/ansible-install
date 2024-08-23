@@ -1,3 +1,10 @@
+- name: Install QT libraries
+  pacman:
+    name:
+      - qt5-wayland
+      - qt6-wayland
+    state: present
+
 - name: Install Hyprland
   pacman:
     name:
