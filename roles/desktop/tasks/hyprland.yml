@@ -52,6 +52,8 @@
     name:
       - sysmenu
     state: present
+  become: yes
+  become_user: "{{ current_user }}"
 
 - name: Install the system bar
   kewlfft.aur.aur:
