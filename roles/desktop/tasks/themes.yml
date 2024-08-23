@@ -6,11 +6,6 @@
     remote_src: yes
     creates: /usr/share/sddm/themes/catppuccin-mocha
 
-- name: Set sddm theme
-  lineinfile:
-    path: /etc/sddm.conf
-    line: "Current=catppuccin-mocha"
-
 - name: Ensure SDDM configuration directory exists
   file:
     path: /etc/sddm.conf.d/
