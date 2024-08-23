@@ -3,7 +3,6 @@
     name:
       - bluez
       - bluez-utils
-      - pulseaudio-bluetooth
       # - blueman
       # - gnome-bluetooth-3.0
     state: present
