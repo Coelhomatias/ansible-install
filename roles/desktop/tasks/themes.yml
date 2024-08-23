@@ -33,7 +33,7 @@
       - catppuccin-mocha-grub-theme-git
     state: present
   become: yes
-  become_user: "{{ ansible_env.USER }}"
+  become_user: "{{ current_user }}"
 
 - name: Set catppuccin theme for grub
   lineinfile:
@@ -56,7 +56,7 @@
       - catppuccin-gtk-theme-mocha
     state: present
   become: yes
-  become_user: "{{ ansible_env.USER }}"
+  become_user: "{{ current_user }}"
 
 - name: Install powerlevel10k
   kewlfft.aur.aur:
@@ -64,4 +64,4 @@
     name: zsh-theme-powerlevel10k-git
     state: present
   become: yes
-  become_user: "{{ ansible_env.USER }}"
+  become_user: "{{ current_user }}"

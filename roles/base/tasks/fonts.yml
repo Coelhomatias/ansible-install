@@ -24,4 +24,4 @@
 - name: Rebuild font cache
   command: fc-cache -f -v
   become: yes
-  become_user: "{{ ansible_env.USER }}"
+  become_user: "{{ current_user }}"

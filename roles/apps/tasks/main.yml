@@ -44,11 +44,11 @@
       - stremio
     state: present
   become: yes
-  become_user: "{{ ansible_env.USER }}"
+  become_user: "{{ current_user }}"
 
 - name: Add user to docker group
   user:
-    name: "{{ ansible_env.USER }}"
+    name: "{{ current_user }}"
     groups: docker
     append: yes
   become: yes

@@ -9,4 +9,4 @@
     name: xdg-terminal-exec-git
     state: present
   become: yes
-  become_user: "{{ ansible_env.USER }}"
+  become_user: "{{ current_user }}"

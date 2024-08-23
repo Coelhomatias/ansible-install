@@ -93,7 +93,7 @@
     state: present
 
 - name: Set zsh as default shell
-  shell: chsh -s $(which zsh) "{{ ansible_env.USER }}"
+  shell: chsh -s $(which zsh) "{{ current_user }}"
 
 - name: Install zsh plugins
   pacman:
@@ -109,4 +109,4 @@
     name: zsh-you-should-use
     state: present
   become: yes
-  become_user: "{{ ansible_env.USER }}"
+  become_user: "{{ current_user }}"

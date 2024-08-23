@@ -14,9 +14,9 @@
 - name: Enable pipewire service
   shell: systemctl --user enable --now pipewire
   become: yes
-  become_user: "{{ ansible_env.USER }}"
+  become_user: "{{ current_user }}"
 
 - name: Enable pipewire-pulse service
   shell: systemctl --user enable --now pipewire-pulse
   become: yes
-  become_user: "{{ ansible_env.USER }}"
+  become_user: "{{ current_user }}"

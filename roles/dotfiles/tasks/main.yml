@@ -1,20 +1,20 @@
 - name: Clone the dotfiles repository
   git:
     repo: https://github.com/Coelhomatias/.dotfiles.git
-    dest: /home/{{ ansible_env.USER }}/.dotfiles
+    dest: /home/{{ current_user }}/.dotfiles
     single_branch: yes
     version: hyprland
   become: yes
-  become_user: "{{ ansible_env.USER }}"
+  become_user: "{{ current_user }}"
 
 - name: Stow the dotfiles
-  shell: cd /home/{{ ansible_env.USER }}/.dotfiles && stow --adopt .
+  shell: cd /home/{{ current_user }}/.dotfiles && stow --adopt .
   become: yes
-  become_user: "{{ ansible_env.USER }}"
+  become_user: "{{ current_user }}"
 
 - name: Restore git repo
-  shell: cd /home/{{ ansible_env.USER }}/.dotfiles && git restore .
+  shell: cd /home/{{ current_user }}/.dotfiles && git restore .
   become: yes
-  become_user: "{{ ansible_env.USER }}"
+  become_user: "{{ current_user }}"
 
 - include_tasks: themes.yml
