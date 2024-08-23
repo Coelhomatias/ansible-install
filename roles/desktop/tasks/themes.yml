@@ -60,3 +60,19 @@
     state: present
   become: yes
   become_user: "{{ current_user }}"
+
+- name: Install kora icon theme
+  kewlfft.aur.aur:
+    use: paru
+    name: kora-icon-theme
+    state: present
+  become: yes
+  become_user: "{{ current_user }}"
+
+- name: Install catppuccin cursors
+  kewlfft.aur.aur:
+    use: paru
+    name: catppuccin-cursors-mocha
+    state: present
+  become: yes
+  become_user: "{{ current_user }}"
