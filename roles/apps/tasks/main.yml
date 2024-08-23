@@ -1,0 +1,61 @@
+- name: Install apps from pacman
+  pacman:
+    name:
+      - code
+      - vlc
+      - rclone
+      - yazi
+      - neovim
+      - easyeffects
+      - spotify-launcher
+      - flameshot # Needs testing
+      - obsidian
+      - firefox
+      - bitwarden
+      - docker
+      - docker-compose
+      # - aerc # Needs testing Looks awesome email client in terminal
+    state: present
+
+- name: Install thunar file manager
+  pacman:
+    name:
+      - thunar
+      - gvfs
+      - gvfs-mtp
+      - thunar-archive-plugin
+      - thunar-media-tags-plugin
+      - tumbler
+      - thunar-volman
+    state: present
+
+- name: Install apps from AUR
+  kewlfft.aur.aur:
+    use: paru
+    name:
+      - skypeforlinux-bin
+      - teams-for-linux-bin
+      - teams-for-linux-wayland-hook
+      - nchat
+      - toipe
+      - armcord-bin
+      - microsoft-edge-stable-bin
+      - zapzap
+      - stremio
+    state: present
+  become: yes
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Add user to docker group
+  user:
+    name: "{{ ansible_env.USER }}"
+    groups: docker
+    append: yes
+  become: yes
+
+- name: Enable the docker.socket service
+  systemd:
+    name: docker.socket
+    enabled: yes
+    state: restarted
+    daemon_reload: yes

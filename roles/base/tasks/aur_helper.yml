@@ -1,0 +1,7 @@
+---
+- name: Install paru AUR helper
+  kewlfft.aur.aur:
+    name: paru
+    state: present
+  become: yes
+  become_user: "{{ ansible_env.USER }}"

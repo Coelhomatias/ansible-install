@@ -1,0 +1,15 @@
+- name: Install bluetooth packages
+  pacman:
+    name:
+      - bluez
+      - bluez-utils
+      - pulseaudio-bluetooth
+      # - blueman
+      # - gnome-bluetooth-3.0
+    state: present
+
+- name: Enable bluetooth service
+  systemd:
+    name: bluetooth
+    enabled: yes
+    state: started

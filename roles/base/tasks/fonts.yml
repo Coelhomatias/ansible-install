@@ -1,0 +1,27 @@
+- name: Install common fonts
+  pacman:
+    name:
+      - noto-fonts
+      - noto-fonts-emoji
+      - ttf-ubuntu-font-family
+      - ttf-dejavu
+      - ttf-liberation
+      - ttf-droid
+      - ttf-inconsolata
+      - ttf-roboto
+      - ttf-roboto-mono
+      - ttf-opensans
+      - ttf-fira-code
+      - ttf-fira-mono
+      - ttf-firacode-nerd
+      - ttf-fira-sans
+      - ttf-freefont
+      - terminus-font
+      - ttf-croscore
+      - ttf-jetbrains-mono-nerd
+    state: present
+
+- name: Rebuild font cache
+  command: fc-cache -f -v
+  become: yes
+  become_user: "{{ ansible_env.USER }}"

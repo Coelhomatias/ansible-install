@@ -1,0 +1,5 @@
+# Install amd drivers
+- name: Install amd drivers
+  pacman:
+    name: xf86-video-amdgpu
+    state: present

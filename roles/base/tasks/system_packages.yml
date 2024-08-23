@@ -1,0 +1,107 @@
+- name: Install linux-headers
+  pacman:
+    name: linux-headers
+    state: present
+
+- name: Install base-devel
+  pacman:
+    name: base-devel
+    state: present
+
+- name: Install openssh
+  pacman:
+    name: openssh
+    state: present
+
+- name: Enable sshd service
+  systemd:
+    name: sshd
+    enabled: yes
+    state: started
+
+- name: Install xsettingsd
+  pacman:
+    name: xsettingsd
+    state: present
+
+- name: Install xdg-user-dirs
+  pacman:
+    name: xdg-user-dirs
+    state: present
+
+- name: Install xdg-utils
+  pacman:
+    name: xdg-utils
+    state: present
+
+- name: Install xdg-desktop-portal
+  pacman:
+    name: xdg-desktop-portal
+    state: present
+
+- name: Install authentication agent
+  pacman:
+    name: polkit-gnome
+    state: present
+
+- name: Install removable media support
+  pacman:
+    name: udiskie
+    state: present
+
+- name: Install QT libraries
+  pacman:
+    name:
+      - qt5-wayland
+      - qt6-wayland
+    state: present
+
+- name: Install system utils
+  pacman:
+    name:
+      - lm_sensors
+      - trash-cli
+      - gnome-keyring
+      - bc
+    state: present
+
+- name: Install wl-clipboard
+  pacman:
+    name: wl-clipboard
+    state: present
+
+- name: Install gtk notification lib
+  pacman:
+    name:
+      - libdbusmenu-gtk3
+    state: present
+
+- name: Install AUR system utils
+  pacman:
+    name:
+      - clipse
+    state: present
+
+- name: Install zsh
+  pacman:
+    name: zsh
+    state: present
+
+- name: Set zsh as default shell
+  shell: chsh -s $(which zsh) "{{ ansible_env.USER }}"
+
+- name: Install zsh plugins
+  pacman:
+    name:
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+      - zsh-completions
+    state: present
+
+- name: Install zsh-you-should-use
+  kewlfft.aur.aur:
+    use: paru
+    name: zsh-you-should-use
+    state: present
+  become: yes
+  become_user: "{{ ansible_env.USER }}"

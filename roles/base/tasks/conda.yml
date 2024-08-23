@@ -1,0 +1,32 @@
+- name: Create a directory for Miniconda
+  file:
+    path: "~/miniconda3"
+    state: directory
+  become: yes
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Download Miniconda installation script
+  get_url:
+    url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    dest: "~/miniconda3/miniconda.sh"
+  become: yes
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Install Miniconda
+  shell: bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+  args:
+    creates: "~/miniconda3/bin/conda"
+  become: yes
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Remove Miniconda installation script
+  file:
+    path: "~/miniconda3/miniconda.sh"
+    state: absent
+  become: yes
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Init conda for zsh
+  shell: ~/miniconda3/bin/conda init zsh
+  become: yes
+  become_user: "{{ ansible_env.USER }}"

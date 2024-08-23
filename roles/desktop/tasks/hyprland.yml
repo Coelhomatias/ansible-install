@@ -1,0 +1,56 @@
+- name: Install Hyprland
+  pacman:
+    name:
+      - hyprland
+      - hypridle
+      - hyprpaper
+      - hyprlock
+      - xdg-desktop-portal-hyprland
+      - xdg-desktop-portal-gtk
+    state: present
+
+- name: Install hyprpicker
+  kewlfft.aur.aur:
+    use: paru
+    name:
+      - hyprpicker
+      # - pyprland     # Needs review
+    state: present
+  become: yes
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Install the display manager and dependencies
+  pacman:
+    name:
+      - sddm
+      - qt6-declarative
+      - qt6-svg
+    state: present
+
+- name: Enable the display manager
+  systemd:
+    name: sddm
+    enabled: yes
+    state: started
+
+- name: Install the notification daemon
+  pacman:
+    name:
+      - swaync
+    state: present
+
+- name: Install the runner
+  kewlfft.aur.aur:
+    use: paru
+    name:
+      - sysmenu
+    state: present
+
+- name: Install the system bar
+  kewlfft.aur.aur:
+    use: paru
+    name:
+      - gbar-git
+    state: present
+  become: yes
+  become_user: "{{ ansible_env.USER }}"

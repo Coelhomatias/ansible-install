@@ -1,0 +1,46 @@
+- name: Install terminal utils
+  pacman:
+    name:
+      - eza
+      - jq
+      - graphicsmagick
+      - ffmpegthumbnailer
+      - nm-connection-editor
+      - tmux
+      - poppler
+      - zoxide
+      - fzf
+      - ripgrep
+      - bat
+      - fd
+      - brightnessctl
+      - btop
+      - git-delta
+      - unarchiver
+      - unzip
+      - p7zip
+      - stow
+      - playerctl
+      - fastfetch
+      - nwg-look
+      - man
+      - zathura
+      - zathura-pdf-poppler
+      - zathura-djvu
+      - zathura-ps
+      - zathura-cb
+      - nvim
+    state: present
+
+- name: Install terminal utils from AUR
+  kewlfft.aur.aur:
+    use: paru
+    name:
+      - tlrc-bin
+      - sesh-bin
+      - rnr
+      - nwg-displays
+      - bluetui # Needs Review
+    state: present
+  become: yes
+  become_user: "{{ ansible_env.USER }}"

@@ -1,0 +1,9 @@
+- name: Apply GTK themes
+  shell: nwg-look -a
+  become: yes
+  become_user: "{{ ansible_env.USER }}"
+
+- name: Rebuild bat's cache
+  shell: bat cache --build
+  become: yes
+  become_user: "{{ ansible_env.USER }}"
