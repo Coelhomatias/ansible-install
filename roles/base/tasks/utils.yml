@@ -29,7 +29,7 @@
       - zathura-djvu
       - zathura-ps
       - zathura-cb
-      - nvim
+      - neovim
     state: present
 
 - name: Install terminal utils from AUR

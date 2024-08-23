@@ -5,7 +5,6 @@
       - vlc
       - rclone
       - yazi
-      - neovim
       - easyeffects
       - spotify-launcher
       - flameshot # Needs testing
