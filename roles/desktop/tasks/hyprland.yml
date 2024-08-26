@@ -39,36 +39,35 @@
     name: sddm
     enabled: yes
     state: started
+# - name: Install the notification daemon
+#   pacman:
+#     name:
+#       - swaync
+#     state: present
 
-- name: Install the notification daemon
-  pacman:
-    name:
-      - swaync
-    state: present
+# - name: Install the runner
+#   kewlfft.aur.aur:
+#     use: paru
+#     name:
+#       - sysmenu
+#     state: present
+#   become: yes
+#   become_user: "{{ current_user }}"
 
-- name: Install the runner
-  kewlfft.aur.aur:
-    use: paru
-    name:
-      - sysmenu
-    state: present
-  become: yes
-  become_user: "{{ current_user }}"
+# - name: Install the system bar
+#   kewlfft.aur.aur:
+#     use: paru
+#     name:
+#       - gbar-git
+#     state: present
+#   become: yes
+#   become_user: "{{ current_user }}"
 
-- name: Install the system bar
-  kewlfft.aur.aur:
-    use: paru
-    name:
-      - gbar-git
-    state: present
-  become: yes
-  become_user: "{{ current_user }}"
-
-- name: Install the OSD server
-  kewlfft.aur.aur:
-    use: paru
-    name:
-      - swayosd-git
-    state: present
-  become: yes
-  become_user: "{{ current_user }}"
+# - name: Install the OSD server
+#   kewlfft.aur.aur:
+#     use: paru
+#     name:
+#       - swayosd-git
+#     state: present
+#   become: yes
+#   become_user: "{{ current_user }}"

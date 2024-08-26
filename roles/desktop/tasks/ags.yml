@@ -1,0 +1,52 @@
+- name: Install ags dependencies
+  kewlfft.aur.aur:
+    use: paru
+    name:
+      - dart-sass
+      - swww
+      - matugen
+      - slurp
+      - wf-recorder
+      - wayshot-bin
+      - swappy
+      - supergfxctl
+    state: present
+  become: yes
+  become_user: "{{ current_user }}"
+
+- name: Enable and start the supergfxctl service
+  systemd:
+    name: supergfxctl
+    enabled: yes
+    state: started
+  become: yes
+
+- name: Install bun
+  shell: curl -fsSL https://bun.sh/install | bash
+  become: yes
+  become_user: "{{ current_user }}"
+
+- name: Add bun to PATH
+  lineinfile:
+    path: ~/.zshrc
+    line: 'export PATH="$HOME/.bun/bin:$PATH"'
+    create: yes
+  become: yes
+  become_user: "{{ current_user }}"
+
+- name: Add BUN_INSTALL
+  lineinfile:
+    path: ~/.zshrc
+    line: 'export BUN_INSTALL="$HOME/.bun"'
+    create: yes
+  become: yes
+  become_user: "{{ current_user }}"
+
+- name: Install ags
+  kewlfft.aur.aur:
+    use: paru
+    name:
+      - aylurs-gtk-shell
+    state: present
+  become: yes
+  become_user: "{{ current_user }}"

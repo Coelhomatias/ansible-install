@@ -7,7 +7,7 @@
       - yazi
       - easyeffects
       - spotify-launcher
-      - flameshot # Needs testing
+      # - flameshot # Needs testing
       - obsidian
       - firefox
       - bitwarden
