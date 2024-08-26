@@ -34,11 +34,11 @@
       - qt6-svg
     state: present
 
-- name: Enable the display manager
+- name: Enable the display manager but do not start it
   systemd:
     name: sddm
     enabled: yes
-    state: started
+    state: stopped
 # - name: Install the notification daemon
 #   pacman:
 #     name:
