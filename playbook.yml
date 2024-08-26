@@ -2,9 +2,6 @@
   hosts: localhost
   become: yes
 
-  vars:
-    current_user: "coelhomatias"
-
   pre_tasks:
     - name: Update package cache
       pacman:
