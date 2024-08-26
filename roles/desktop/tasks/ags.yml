@@ -16,7 +16,7 @@
 
 - name: Enable and start the supergfxctl service
   systemd:
-    name: supergfxctl
+    name: supergfxd
     enabled: yes
     state: started
   become: yes
