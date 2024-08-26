@@ -3,7 +3,7 @@
     repo: https://github.com/Coelhomatias/.dotfiles.git
     dest: /home/{{ current_user }}/.dotfiles
     single_branch: yes
-    version: hyprland
+    version: aylur
   become: yes
   become_user: "{{ current_user }}"
 
