@@ -1,5 +1,8 @@
 # Install nvidia drivers
 - name: Install nvidia drivers
   pacman:
-    name: nvidia nvidia-utils nvidia-settings
+    name: 
+      - nvidia
+      - nvidia-utils
+      - nvidia-settings
     state: present
