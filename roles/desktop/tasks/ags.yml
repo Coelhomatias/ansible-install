@@ -10,6 +10,7 @@
       - wayshot-bin
       - swappy
       - supergfxctl
+      - gnome-bluetooth-3.0
     state: present
   become: yes
   become_user: "{{ current_user }}"
@@ -26,21 +27,8 @@
   become: yes
   become_user: "{{ current_user }}"
 
-- name: Add bun to PATH
-  lineinfile:
-    path: ~/.zshrc
-    line: 'export PATH="$HOME/.bun/bin:$PATH"'
-    create: yes
-  become: yes
-  become_user: "{{ current_user }}"
-
-- name: Add BUN_INSTALL
-  lineinfile:
-    path: ~/.zshrc
-    line: 'export BUN_INSTALL="$HOME/.bun"'
-    create: yes
-  become: yes
-  become_user: "{{ current_user }}"
+- name: Symlink to /usr/bin
+  shell: ln -sf /home/{{ current_user }}/.bun/bin/bun /usr/bin/bun
 
 - name: Install ags
   kewlfft.aur.aur:
