@@ -48,6 +48,16 @@
             state: absent
 
   post_tasks:
+    - name: Make sure GRUB_DISABLE_OS_PROBER is set to false
+      lineinfile:
+        dest: /etc/default/grub
+        state: present
+        regexp: "^GRUB_DISABLE_OS_PROBER="
+        line: "GRUB_DISABLE_OS_PROBER=false"
+
+    - name: Generate GRUB configuration
+      shell: grub-mkconfig -o /boot/grub/grub.cfg
+
     - name: Schedule system restart
       command: shutdown -r +1 "Ansible provisioning complete. Rebooting in 1 minute."
       async: 0

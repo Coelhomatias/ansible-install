@@ -27,6 +27,7 @@
       - thunar-media-tags-plugin
       - tumbler
       - thunar-volman
+      - xfce4-settings
     state: present
 
 - name: Install apps from AUR

@@ -69,6 +69,11 @@
       - libdbusmenu-gtk3
     state: present
 
+- name: Install os-prober
+  pacman:
+    name: os-prober
+    state: present
+
 - name: Install zsh
   pacman:
     name: zsh
