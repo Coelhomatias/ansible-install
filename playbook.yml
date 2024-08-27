@@ -21,24 +21,33 @@
         line: "{{ current_user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman"
         validate: "visudo -cf %s"
 
-  roles:
-    - base
-    - apps
-    - desktop
-    - dotfiles
+  tasks:
+    - name: Install roles
+      block:
+        - include_role:
+            name: "{{ item }}"
+          with_items:
+            - base
+            - apps
+            - desktop
+            - dotfiles
+      rescue:
+        - name: Notify user of failure
+          debug:
+            msg: "Failed to install roles"
+      always:
+        - name: Revert sudoers file
+          copy:
+            src: /etc/sudoers.bak
+            dest: /etc/sudoers
+            remote_src: yes
+
+        - name: Remove sudoers backup file
+          file:
+            path: /etc/sudoers.bak
+            state: absent
 
   post_tasks:
-    - name: Revert sudoers file
-      copy:
-        src: /etc/sudoers.bak
-        dest: /etc/sudoers
-        remote_src: yes
-
-    - name: Remove sudoers backup file
-      file:
-        path: /etc/sudoers.bak
-        state: absent
-
     - name: Schedule system restart
       command: shutdown -r +1 "Ansible provisioning complete. Rebooting in 1 minute."
       async: 0
