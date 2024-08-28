@@ -4,11 +4,6 @@
       - unzip
       - p7zip
       - stow
-      - zathura
-      - zathura-pdf-poppler
-      - zathura-djvu
-      - zathura-ps
-      - zathura-cb
     state: present
   become: yes
 
