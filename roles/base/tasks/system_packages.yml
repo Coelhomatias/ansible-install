@@ -7,9 +7,11 @@
   register: user_linuxbrew
 
 - name: Set Homebrew environment variables for user installation
-  ansible.builtin.shell: eval "$(~/.linuxbrew/bin/brew shellenv)"
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc
+    line: eval "$(~/.linuxbrew/bin/brew shellenv)"
+    state: present
   when: user_linuxbrew.stat.exists
-  changed_when: false
 
 - name: Check if /home/linuxbrew/.linuxbrew exists
   ansible.builtin.stat:
@@ -17,20 +19,11 @@
   register: system_linuxbrew
 
 - name: Set Homebrew environment variables for system installation
-  ansible.builtin.shell: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  when: system_linuxbrew.stat.exists
-  changed_when: false
-
-- name: Get Homebrew prefix
-  ansible.builtin.command: brew --prefix
-  register: brew_prefix
-  changed_when: false
-
-- name: Add Homebrew to .zshrc
   ansible.builtin.lineinfile:
     path: ~/.zshrc
-    line: 'eval "$({{ brew_prefix.stdout }}/bin/brew shellenv)"'
+    line: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     state: present
+  when: system_linuxbrew.stat.exists
 
 - name: Install zsh and plugins with brew
   homebrew:
