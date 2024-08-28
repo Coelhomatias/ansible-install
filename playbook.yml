@@ -7,8 +7,10 @@
       apt:
         update_cache: yes
   tasks:
-    - include_role: base
-    - include_role: dotfiles
+    - include_role:
+        name: base
+    - include_role:
+        name: dotfiles
 
   post_tasks:
     - name: Schedule system restart
