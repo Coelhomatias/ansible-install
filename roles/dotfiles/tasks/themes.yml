@@ -1,7 +1,7 @@
-- name: Rebuild bat's cache
-  shell: bat cache --build
-
 - name: Install powerlevel10k
   homebrew:
     name: powerlevel10k
     state: present
+
+- name: Rebuild bat's cache
+  shell: bat cache --build

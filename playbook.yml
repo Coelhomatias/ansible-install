@@ -12,18 +12,3 @@
         name: base
     - include_role:
         name: dotfiles
-
-  post_tasks:
-    - name: Schedule system restart
-      command: shutdown -r +1 "Ansible provisioning complete. Rebooting in 1 minute."
-      async: 0
-      poll: 0
-      ignore_errors: true
-      become: yes
-
-    - name: Wait for 10 seconds before ending play
-      pause:
-        seconds: 10
-
-    - name: End play
-      meta: end_play
