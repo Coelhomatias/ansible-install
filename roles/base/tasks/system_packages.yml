@@ -4,13 +4,8 @@
 - name: Install zsh and plugins with brew
   homebrew:
     name:
-      - zsh
       - zsh-completions
       - zsh-syntax-highlighting
       - zsh-autosuggestions
       - zsh-you-should-use
     state: present
-
-- name: Set zsh as default shell
-  command: chsh -s /usr/bin/zsh "{{ current_user }}"
-  become: yes
