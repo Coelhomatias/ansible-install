@@ -1,7 +1,5 @@
 - name: Install brew
   ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  args:
-    creates: /home/{{ current_user }}/homebrew
 
 - name: Install zsh and plugins with brew
   homebrew:
