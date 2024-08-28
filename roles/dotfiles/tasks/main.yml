@@ -6,11 +6,11 @@
     version: aylur
 
 - name: Stow the dotfiles
-  shell: cd /home/{{ current_user }}/.dotfiles && stow */
+  shell: cd /home/{{ current_user }}/.dotfiles && stow --adopt */
 
-# - name: Restore git repo
-#   shell: cd /home/{{ current_user }}/.dotfiles && git restore .
-#   become: yes
-#   become_user: "{{ current_user }}"
+- name: Restore git repo
+  shell: cd /home/{{ current_user }}/.dotfiles && git restore .
+  become: yes
+  become_user: "{{ current_user }}"
 
 - include_tasks: themes.yml
