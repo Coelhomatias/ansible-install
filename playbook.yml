@@ -1,11 +1,12 @@
 - name: Apply all roles
   hosts: localhost
-  become: yes
 
   pre_tasks:
     - name: Update package cache
       apt:
         update_cache: yes
+      become: yes
+
   tasks:
     - include_role:
         name: base
@@ -18,6 +19,7 @@
       async: 0
       poll: 0
       ignore_errors: true
+      become: yes
 
     - name: Wait for 10 seconds before ending play
       pause:

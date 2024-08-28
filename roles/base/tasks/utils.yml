@@ -1,5 +1,5 @@
 - name: Install terminal utils
-  pacman:
+  apt:
     name:
       - unzip
       - p7zip
@@ -10,6 +10,7 @@
       - zathura-ps
       - zathura-cb
     state: present
+  become: yes
 
 - name: Install terminal utils from brew
   homebrew:

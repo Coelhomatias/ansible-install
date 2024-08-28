@@ -16,8 +16,7 @@
       - fonts-roboto-slab
       - fonts-ubuntu
     state: present
+  become: yes
 
 - name: Rebuild font cache
   command: fc-cache -f -v
-  become: yes
-  become_user: "{{ current_user }}"
