@@ -1,7 +1,7 @@
 #/usr/bin/bash
-
-echo "Installing Ansible collections from requirements.yml..."
-ansible-galaxy collection install -r ~/arch-ansible/requirements.yml
+# Install ansible
+echo "Installing ansible"
+sudo apt-get install ansible -y
 
 echo "Running the ansible playbook. Please enter your sudo password when prompted."
-ansible-playbook ~/arch-ansible/playbook.yml --ask-vault-pass
+ansible-playbook playbook.yml -K

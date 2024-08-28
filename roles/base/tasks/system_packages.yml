@@ -1,99 +1,53 @@
-- name: Install linux-headers
-  pacman:
-    name: linux-headers
+- name: Add zsh-completions repository
+  ansible.builtin.apt_repository:
+    repo: deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-completions/xUbuntu_22.04/ /
     state: present
+    filename: shells_zsh-users_zsh-completions
 
-- name: Install base-devel
-  pacman:
-    name: base-devel
-    state: present
+- name: Add GPG key for zsh-completions repository
+  ansible.builtin.get_url:
+    url: https://download.opensuse.org/repositories/shells:zsh-users:zsh-completions/xUbuntu_22.04/Release.key
+    dest: /tmp/zsh-completions-repo.key
+    mode: "0644"
 
-- name: Install openssh
-  pacman:
-    name: openssh
-    state: present
+- name: Import GPG key
+  ansible.builtin.command: gpg --dearmor /tmp/zsh-completions-repo.key
+  register: gpg_result
+  changed_when: gpg_result.rc == 0
 
-- name: Enable sshd service
-  systemd:
-    name: sshd
-    enabled: yes
-    state: started
+- name: Move GPG key to trusted.gpg.d
+  ansible.builtin.copy:
+    content: "{{ gpg_result.stdout }}"
+    dest: /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-completions.gpg
+    mode: "0644"
 
-- name: Install xsettingsd
-  pacman:
-    name: xsettingsd
-    state: present
+- name: Remove temporary GPG key file
+  ansible.builtin.file:
+    path: /tmp/zsh-completions-repo.key
+    state: absent
 
-- name: Install xdg-user-dirs
-  pacman:
-    name: xdg-user-dirs
-    state: present
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
 
-- name: Install xdg-utils
-  pacman:
-    name: xdg-utils
-    state: present
-
-- name: Install xdg-desktop-portal
-  pacman:
-    name: xdg-desktop-portal
-    state: present
-
-- name: Install authentication agent
-  pacman:
-    name: polkit-gnome
-    state: present
-
-- name: Install removable media support
-  pacman:
-    name: udiskie
-    state: present
-
-- name: Install system utils
-  pacman:
+- name: Install zsh and plugins
+  ansible.builtin.apt:
     name:
-      - lm_sensors
-      - trash-cli
-      - gnome-keyring
-      - bc
-    state: present
-
-- name: Install wl-clipboard
-  pacman:
-    name: wl-clipboard
-    state: present
-
-- name: Install gtk notification lib
-  pacman:
-    name:
-      - libdbusmenu-gtk3
-    state: present
-
-- name: Install os-prober
-  pacman:
-    name: os-prober
-    state: present
-
-- name: Install zsh
-  pacman:
-    name: zsh
+      - zsh
+      - zsh-completions
+      - zsh-syntax-highlighting
+      - zsh-autosuggestions
     state: present
 
 - name: Set zsh as default shell
-  shell: chsh -s $(which zsh) "{{ current_user }}"
+  command: chsh -s /usr/bin/zsh "{{ current_user }}"
 
-- name: Install zsh plugins
-  pacman:
-    name:
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
-      - zsh-completions
-    state: present
+- name: Install brew
+  ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  args:
+    creates: /home/{{ current_user }}/homebrew
 
-- name: Install zsh-you-should-use
-  kewlfft.aur.aur:
-    use: paru
+- name: Install zsh-you-should-use with brew
+  homebrew:
     name: zsh-you-should-use
     state: present
-  become: yes
-  become_user: "{{ current_user }}"

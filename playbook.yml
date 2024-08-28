@@ -4,60 +4,13 @@
 
   pre_tasks:
     - name: Update package cache
-      pacman:
+      apt:
         update_cache: yes
 
-    - name: Create sudoers file backup
-      copy:
-        src: /etc/sudoers
-        dest: /etc/sudoers.bak
-        remote_src: yes
-
-    - name: Allow passwordless sudo for specific commands
-      lineinfile:
-        dest: /etc/sudoers
-        state: present
-        regexp: '^{{ current_user }} ALL\='
-        line: "{{ current_user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman"
-        validate: "visudo -cf %s"
-
-  tasks:
-    - name: Install roles
-      block:
-        - include_role:
-            name: "{{ item }}"
-          with_items:
-            - base
-            - apps
-            - desktop
-            - dotfiles
-      rescue:
-        - name: Notify user of failure
-          debug:
-            msg: "Failed to install roles"
-      always:
-        - name: Revert sudoers file
-          copy:
-            src: /etc/sudoers.bak
-            dest: /etc/sudoers
-            remote_src: yes
-
-        - name: Remove sudoers backup file
-          file:
-            path: /etc/sudoers.bak
-            state: absent
+  - include_role: base
+  - include_role: dotfiles
 
   post_tasks:
-    - name: Make sure GRUB_DISABLE_OS_PROBER is set to false
-      lineinfile:
-        dest: /etc/default/grub
-        state: present
-        regexp: "^GRUB_DISABLE_OS_PROBER="
-        line: "GRUB_DISABLE_OS_PROBER=false"
-
-    - name: Generate GRUB configuration
-      shell: grub-mkconfig -o /boot/grub/grub.cfg
-
     - name: Schedule system restart
       command: shutdown -r +1 "Ansible provisioning complete. Rebooting in 1 minute."
       async: 0

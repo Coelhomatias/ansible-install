@@ -1,46 +1,35 @@
 - name: Install terminal utils
   pacman:
     name:
-      - eza
-      - jq
-      - graphicsmagick
-      - ffmpegthumbnailer
-      - nm-connection-editor
-      - tmux
-      - poppler
-      - zoxide
-      - fzf
-      - ripgrep
-      - bat
-      - fd
-      - brightnessctl
-      - btop
-      - git-delta
-      - unarchiver
       - unzip
       - p7zip
       - stow
-      - playerctl
-      - fastfetch
-      - nwg-look
-      - man
       - zathura
       - zathura-pdf-poppler
       - zathura-djvu
       - zathura-ps
       - zathura-cb
-      - neovim
     state: present
 
-- name: Install terminal utils from AUR
-  kewlfft.aur.aur:
-    use: paru
+- name: Install terminal utils from brew
+  homebrew:
     name:
-      - tlrc-bin
-      - sesh-bin
+      - sesh
+      - tlrc
       - rnr
-      - nwg-displays
-      - bluetui # Needs Review
+      - fzf
+      - eza
+      - tmux
+      - jq
+      - neovim
+      - yazi
+      - fastfetch
+      - zoxide
+      - poppler
+      - graphicsmagick
+      - ffmpegthumbnailer
+      - ripgrep
+      - bat
+      - fd
+      - btop
     state: present
-  become: yes
-  become_user: "{{ current_user }}"

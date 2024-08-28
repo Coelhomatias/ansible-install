@@ -1,4 +1,0 @@
----
-- include_tasks: hyprland.yml
-- include_tasks: themes.yml
-- include_tasks: ags.yml
