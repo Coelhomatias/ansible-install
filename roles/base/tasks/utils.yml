@@ -25,7 +25,6 @@
       - neovim
       - yazi
       - fastfetch
-      - zoxide
       - poppler
       - graphicsmagick
       - ffmpegthumbnailer
@@ -34,3 +33,6 @@
       - fd
       - btop
     state: present
+
+- name: Install zoxide
+  shell: curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
