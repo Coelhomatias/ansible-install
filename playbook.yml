@@ -6,9 +6,9 @@
     - name: Update package cache
       apt:
         update_cache: yes
-
-  - include_role: base
-  - include_role: dotfiles
+  tasks:
+    - include_role: base
+    - include_role: dotfiles
 
   post_tasks:
     - name: Schedule system restart
