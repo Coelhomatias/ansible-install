@@ -15,7 +15,7 @@
 - name: Install terminal utils from brew
   homebrew:
     name:
-      - joshmedeski/sesh/sesh
+      # - joshmedeski/sesh/sesh
       - tlrc
       - rnr
       - fzf
