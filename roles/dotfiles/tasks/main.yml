@@ -8,7 +8,7 @@
   become_user: "{{ current_user }}"
 
 - name: Stow the dotfiles
-  shell: cd /home/{{ current_user }}/.dotfiles && stow */
+  shell: cd /home/{{ current_user }}/.dotfiles && stow --adopt -S */ --ignore=zsh-ubuntu
   become: yes
   become_user: "{{ current_user }}"
 
