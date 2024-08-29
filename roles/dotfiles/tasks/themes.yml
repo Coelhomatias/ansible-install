@@ -6,8 +6,11 @@
 - name: Add powerlevel10k to zsh plugins
   ansible.builtin.lineinfile:
     path: ~/.zshrc
-    line: source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+    line: source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
     state: present
 
 - name: Rebuild bat's cache
   shell: bat cache --build
+
+- name: Source zsh
+  ansible.builtin.shell: source ~/.zshrc

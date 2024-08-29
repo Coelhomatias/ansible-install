@@ -6,7 +6,7 @@
     version: aylur
 
 - name: Stow the dotfiles
-  shell: cd /home/{{ current_user }}/.dotfiles && stow --adopt -S bat btop conda fonts git nvim yazi
+  shell: cd /home/{{ current_user }}/.dotfiles && stow --adopt -S bat btop conda fonts git nvim yazi zsh-ubuntu
 
 - name: Restore git repo
   shell: cd /home/{{ current_user }}/.dotfiles && git restore .

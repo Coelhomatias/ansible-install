@@ -29,3 +29,6 @@
       - zoxide
       - btop
     state: present
+
+- name: Source zsh
+  ansible.builtin.shell: source ~/.zshrc
