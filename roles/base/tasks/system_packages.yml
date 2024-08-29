@@ -33,3 +33,10 @@
       - zsh-autosuggestions
       - zsh-you-should-use
     state: present
+
+- name: Install dev packages
+  apt:
+    name:
+      - make
+    state: present
+  become: yes
