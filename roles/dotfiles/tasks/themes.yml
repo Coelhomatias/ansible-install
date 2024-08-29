@@ -11,6 +11,3 @@
 
 - name: Rebuild bat's cache
   shell: bat cache --build
-
-- name: Source zsh
-  ansible.builtin.shell: source ~/.zshrc

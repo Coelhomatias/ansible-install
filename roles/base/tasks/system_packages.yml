@@ -33,6 +33,3 @@
       - zsh-autosuggestions
       - zsh-you-should-use
     state: present
-
-- name: Source zsh
-  ansible.builtin.shell: source ~/.zshrc
