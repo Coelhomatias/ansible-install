@@ -38,5 +38,7 @@
   apt:
     name:
       - make
+      - gcc
+      - g++
     state: present
   become: yes
