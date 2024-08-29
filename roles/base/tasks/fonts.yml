@@ -1,8 +1,3 @@
-- name: Install fontconfig
-  homebrew:
-    name: fontconfig
-    state: present
-
 - name: Install common fonts
   apt:
     name:

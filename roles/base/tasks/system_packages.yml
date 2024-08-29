@@ -37,6 +37,7 @@
 - name: Install dev packages
   apt:
     name:
+      - fontconfig
       - make
       - gcc
       - g++
