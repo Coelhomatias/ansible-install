@@ -37,8 +37,3 @@
     creates: ~/.nvm
   become: yes
   become_user: "{{ current_user }}"
-
-- name: Install node LTS
-  shell: nvm install --lts --latest-npm
-  become: yes
-  become_user: "{{ current_user }}"

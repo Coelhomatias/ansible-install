@@ -6,7 +6,10 @@
     version: aylur
 
 - name: Stow the dotfiles
-  shell: cd /home/{{ current_user }}/.dotfiles && stow --adopt -S bat btop conda fonts git nvim yazi zsh-ubuntu --no-folding
+  shell: cd /home/{{ current_user }}/.dotfiles && stow --adopt -S bat btop conda git nvim yazi zsh-ubuntu
+
+- name: Stow the dotfiles with no folding
+  shell: cd /home/{{ current_user }}/.dotfiles && stow --adopt -S fonts --no-folding
 
 - name: Restore git repo
   shell: cd /home/{{ current_user }}/.dotfiles && git restore .
