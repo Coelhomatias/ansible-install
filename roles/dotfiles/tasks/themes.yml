@@ -9,5 +9,6 @@
     line: source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
     state: present
 
-- name: Rebuild bat's cache
-  shell: bat cache --build
+# Rebuild bat cache using zsh
+- name: Rebuild bat cache
+  command: /home/linuxbrew/.linuxbrew/bin/bat cache --build

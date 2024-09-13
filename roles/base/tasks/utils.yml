@@ -29,3 +29,16 @@
       - zoxide
       - btop
     state: present
+
+# Install nvm and latest node LTS
+- name: Install nvm
+  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+  args:
+    creates: ~/.nvm
+  become: yes
+  become_user: "{{ current_user }}"
+
+- name: Install node LTS
+  shell: nvm install --lts --latest-npm
+  become: yes
+  become_user: "{{ current_user }}"
